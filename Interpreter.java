@@ -15,7 +15,7 @@ public class Interpreter {
         try {
             //get the first command-line argument and use it to create an Interpreter object called 'interpreter'
             //YOUR CODE HERE:
-
+            Interpreter interpreter = new Interpreter("path");
             //remember to fill in your own assignment number, username, and API key
             Bridges bridges = new Bridges(0, "calexandre1", "419249051969");
             bridges.setTitle(interpreter.getTitle());
