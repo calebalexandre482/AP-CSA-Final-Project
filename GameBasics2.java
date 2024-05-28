@@ -56,27 +56,28 @@ class GameBasics2 extends NonBlockingGame {
    public void initialize() {
        // create a single color or multicolored background to your grid (leaving borders not set yet)
        // STUDENT CODE HERE:
-        for(int i = 0; i < 20; i++) {
-            for(int j = 0; j < 25; j++) {
-                if(i == 0 || j == 0 || i == 19 || j == 24)
-                {
-                    setBGColor(i,j,NamedColor.blue);
-                }
-                else {
-                    setBGColor(i,j,NamedColor.khaki);
-                }
+        for(int i = 0; i < getBoardHeight(); i++) {
+            for(int j = 0; j < getBoardWidth(); j++) {
+                setBGColor(i, j, NamedColor.black);
             }
         }
        
        // create a blue border (top, bottom, left, right) for the grid
        // STUDENT CODE HERE:
-       
+       for(int i = 0; i < getBoardHeight(); i++) {
+            for(int j = 0; j < getBoardWidth(); j++) {
+                if(i == 0 || j == 0 || j == getBoardWidth()-1 || i == getBoardHeight()-1) {
+                    setBGColor(i, j, NamedColor.blue);
+                }   
+            }
+        }
        //Done above
        
        // create a red background color in the cell that is the player's starting location (use your variables redR, redC)
        // STUDENT CODE HERE:
-
-       //setBGColor(redR,redC,NamedColor.red);
+        redC = 1;
+        redR = getBoardHeight()/2;
+        setBGColor(redR,redC,NamedColor.red);
        
        
    }
@@ -90,46 +91,44 @@ class GameBasics2 extends NonBlockingGame {
         // HINT: For each type of movement, you need to turn the current cell back to 
         // yellow and figure out which cell to turn red.
         // STUDENT CODE HERE:
-        redC = 1;
-        redR = 9;
-        int lastR = redR;
+        boolean gameOn = true;
         int lastC = redC;
-        
-        if(super.keyLeft()) {
-            if(redC > 1) {
+        int lastR = redR;
+        while(gameOn) {
+            if(keyUp()) {
                 lastC = redC;
-                redC--;
+                lastR = redR;
+                redR++;
                 setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR,lastC,NamedColor.khaki);
-
+                setBGColor(lastR, redC, NamedColor.black);
             }
-        }
-        if(super.keyRight()) {
-            if(redC < getBoardWidth() - 2) {
+            if(keyDown()) {
                 lastC = redC;
-                redC++;
-                setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR,lastC,NamedColor.khaki);
-
-            }
-        }
-        if(super.keyUp()) {
-            if(redR > 1) {
                 lastR = redR;
                 redR--;
                 setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR,lastC,NamedColor.khaki);
-
+                setBGColor(lastR, redC, NamedColor.black);
             }
-        }
-        if(super.keyDown()) {
-            if(redC > getBoardHeight() - 2) {
+            if(keyRight()) {
+                lastC = redC;
+                lastR = redR;
+                redC++;
+                setBGColor(redR,redC,NamedColor.red);
+                setBGColor(lastR, redC, NamedColor.black);
+            }
+            if(keyLeft()) {
+                lastC = redC;
                 lastR = redR;
                 redC--;
                 setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR,lastC,NamedColor.khaki);
-
+                setBGColor(lastR, redC, NamedColor.black);
             }
+            
+        }
+        if(redC == 0 || redC == getBoardWidth()-1 || redR == 0 || redR == getBoardWidth()-1) {
+            setBGColor(redR, redC, NamedColor.blue);
+            drawSymbol(redR, redC, NamedSymbol.bomb, NamedColor.red);
+            gameOn = false;
         }
         
         

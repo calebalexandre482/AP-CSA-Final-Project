@@ -16,12 +16,12 @@ public class Snake {
         
         //set the variables 'rows' and 'cols' to empty arraylists
         //YOUR CODE HERE:
-        rows = new ArrayList<Integer>();
-        cols = new ArrayList<Integer>();
+        rows = ArrayList<Integer>();
+        cols = ArrayList<Integer>();
         //add starting row and column to 'rows' and 'cols' respectively
         //YOUR CODE HERE:
-        rows.add(0);
-        cols.add(0);
+        rows.add(startingRow);
+        cols.add(startingCol);
     }
 
     //set the snake's direction
@@ -29,20 +29,10 @@ public class Snake {
         //calculate the direction opposite the one the snake is moving in
         //store it in a String variable
         //YOUR CODE HERE:
-        String opposite;
-        if(newDirection.equals("up"))
-            opposite = "down";
-        else if(newDirection.equals("down"))
-            opposite = "up";
-        else if(newDirection.equals("right"))
-            opposite = "left";
-        else if(newDirection.equals("left"))
-            opposite = "right";
+
         //set 'direction' to 'newDirection', unless the opposite of 'direction' is equal to 'newDirection'
         //this condition keeps the snake from turning back on itself
         //YOUR CODE HERE:
-        if(!newDirection.equals(opposite))
-            direction = newDirection;
     }
 
     //create a method called getSize, which returns the size of the snake
