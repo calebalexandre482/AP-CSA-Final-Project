@@ -29,7 +29,7 @@ public class Snake {
         //calculate the direction opposite the one the snake is moving in
         //store it in a String variable
         //YOUR CODE HERE:
-        String opposite;
+        String opposite = "";
         if(newDirection.equals("up"))
             opposite = "down";
         if(newDirection.equals("down"))
@@ -41,7 +41,7 @@ public class Snake {
         //set 'direction' to 'newDirection', unless the opposite of 'direction' is equal to 'newDirection'
         //this condition keeps the snake from turning back on itself
         //YOUR CODE HERE:
-        if(newDirection != direction)
+        if(newDirection != opposite)
             direction = newDirection;
     }
 
@@ -90,20 +90,27 @@ public class Snake {
         //create a variable called 'newRow' which equals the last row number plus 'rowChange'
         //create a variable called 'newCol' which equals the last column number plus 'colChange'
         //YOUR CODE HERE:
-        int newRow = rows.get(rows.size()) + rowChange;
-        int newCol = cols.get(cols.size()) + colChange;
+        int newRow = rows.get(rows.size()-1) + rowChange;
+        int newCol = cols.get(cols.size()-1) + colChange;
         //if the point [newRow, newCol] is already in the snake, return 'true'
         //moving forward would cause the snake to crash into itself!
         //YOUR CODE HERE:
-        
+        for(int i = 0; i < rows.size(); i++) {
+            if(rows.get(i) == newRow && cols.get(i) == newCol)
+                return true;
+        }
         //if the point [newRow, newCol] is in the other snake, return 'true'
         //moving forward would cause the snake to crash into its opponent!
         //YOUR CODE HERE:
-        
+        for(int i = 0; i < rows.size(); i++) {
+            if(otherSnake.getRow(i) == newRow && otherSnake.getCol(i) == newCol)
+                return true;
+        }
         //if the point [newRow, newCol] is out of bounds, return 'true'
         //moving forward would cause the snake to go off the screen!
         //YOUR CODE HERE:
-
+        if(newRow < 0 || newCol < 0)
+            return true;
         //add 'newRow' and 'newCol' to 'rows' and 'cols' respectively
         //YOUR CODE HERE:
         rows.add(newRow);
