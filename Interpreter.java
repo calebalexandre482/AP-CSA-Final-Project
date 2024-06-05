@@ -15,7 +15,7 @@ public class Interpreter {
         try {
             //get the first command-line argument and use it to create an Interpreter object called 'interpreter'
             //YOUR CODE HERE:
-            Interpreter interpreter = new Interpreter("caleb")
+            Interpreter interpreter = new Interpreter("caleb");
             //remember to fill in your own assignment number, username, and API key
             Bridges bridges = new Bridges(20, "calexandre", "419249051969");
             bridges.setTitle(interpreter.getTitle());
@@ -27,6 +27,10 @@ public class Interpreter {
         //if there are no command-line arguments, the program will throw an ArrayIndexOutOfBoundsException
         //create a 'catch' block that prints an error message
         //YOUR CODE HERE:
+        catch(IOException arrayIndexOutOfBoundsException) {
+            System.out.println("An error has occured: ArrayIndexOutOfBoundsException");
+            System.exit(1);
+        }
     }
 
     //the title and description of the picture are 'Title' and 'Description' by default
@@ -45,16 +49,17 @@ public class Interpreter {
     //the program in our mini-language, split by whitespace
     private String[] words;
 
-    private Interpreter(String path) {
+    private Interpreter(String path) throws FileNotFoundException {
         //read the file and interpret the first command
         readFile(path);
         interpretCommand(0);
     }
 
-    private void readFile(String path) {
+    private void readFile(String path) throws FileNotFoundException {
         try(Scanner reader = new Scanner(new FileReader(path))) {
             //create a StringBuilder object
             //YOUR CODE HERE:
+            StringBuilder squid = new StringBuilder();
 
             while(reader.hasNext()) {
                 //get the next line of the file and figure out if it is a comment
@@ -68,11 +73,20 @@ public class Interpreter {
             //convert the StringBuilder into a string, trim it, and split it by whitespace
             //assign the result to the instance variable 'words'
             //YOUR CODE HERE:
+            String turtle = squid.toString();
+            turtle.trim();
+            words[0] = turtle;
         }
 
         //if the argument to this method isn't a real file, a FileNotFoundException will be thrown
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
+        catch(IOException fileNotFoundException) {
+            System.out.println("An error has occured: FileNotFoundException");
+            System.exit(1);
+            
+        }
+        
     }
 
     private void interpretCommand(int index) {
@@ -88,12 +102,34 @@ public class Interpreter {
 
             //add cases for the other five commands
             //YOUR CODE HERE:
+            case "triangle": triangleCommand(index); return;
+            case "line": lineCommand(index); return;
+            case "color": colorCommand(index); return;
+            case "title": titleCommand(index); return;
+            case "description": descriptionCommand(index); return;
         }
 
         //at this point in the method, we know that the command is not valid
         //if it were a valid command, the execution of the method would have ended by now
         //print an error message and stop the program
         //YOUR CODE HERE:
+
+    }
+
+    private void descriptionCommand(int index) {
+
+    }
+
+    private void lineCommand(int index) {
+
+    }
+
+    private void triangleCommand(int index) {
+
+    }
+
+    private void circleCommand(int index) {
+        
     }
 
     private void rectangleCommand(int index) {
