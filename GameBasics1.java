@@ -23,7 +23,7 @@ class GameBasics1 extends NonBlockingGame {
        //create a game board of numRows x numCols within a new Bridges object
        super (assignmentNumber, username,  apiKey, numRows, numCols);
        setTitle("Game Basics 1");
-       setDescription("Create messages to display on the game board.");
+       setDescription("Caleb Alexandre");
    }
 
    
@@ -68,13 +68,14 @@ class GameBasics1 extends NonBlockingGame {
         //     
         // YOUR CODE HERE:
         
-        drawSymbol(2, 8, NamedSymbol.C, NamedColor.blue);
-        drawSymbol(2, 9, NamedSymbol.S, NamedColor.blue);
-        drawSymbol(3, 3, NamedSymbol.R, NamedColor.blue);
-        drawSymbol(3, 4, NamedSymbol.o, NamedColor.blue);
-        drawSymbol(3, 5, NamedSymbol.c, NamedColor.blue);
-        drawSymbol(3, 6, NamedSymbol.k, NamedColor.blue);
-        drawSymbol(3, 7, NamedSymbol.s, NamedColor.blue);
+        drawSymbol(5, 8, NamedSymbol.C, NamedColor.blue);
+        drawSymbol(5, 9, NamedSymbol.S, NamedColor.blue);
+        drawSymbol(6, 6, NamedSymbol.R, NamedColor.blue);
+        drawSymbol(6, 7, NamedSymbol.O, NamedColor.blue);
+        drawSymbol(6, 8, NamedSymbol.C, NamedColor.blue);
+        drawSymbol(6, 9, NamedSymbol.K, NamedColor.blue);
+        drawSymbol(6, 10, NamedSymbol.S, NamedColor.blue);
+        drawSymbol(6, 11, NamedSymbol.star, NamedColor.blue);
         
    }
  

@@ -18,7 +18,7 @@ class GameBasics2 extends NonBlockingGame {
    static int height; // board height (number of rows)
    static int width; // board width (number of columns)
   
-   
+   static boolean gameOn;
    /**
     * Constructor for objects of class GameBasics2Sol
     * @param assignmentNumber your Bridges assignment number
@@ -31,7 +31,7 @@ class GameBasics2 extends NonBlockingGame {
        //create a game board of numRows x numCols within a new Bridges object
        super (assignmentNumber, username,  apiKey, numRows, numCols);
        setTitle("Game Basics 2");
-       setDescription("Create a \"player\" (a red cell that can be moved around the game board with the " +
+       setDescription("Caleb Alexandre - Create a \"player\" (a red cell that can be moved around the game board with the " +
                         "upArrow, downArrow, rightArrow, and leftArrow keys. ");
    }
    
@@ -78,6 +78,7 @@ class GameBasics2 extends NonBlockingGame {
         redC = 1;
         redR = getBoardHeight()/2;
         setBGColor(redR,redC,NamedColor.red);
+        gameOn = true;
        
        
    }
@@ -91,52 +92,51 @@ class GameBasics2 extends NonBlockingGame {
         // HINT: For each type of movement, you need to turn the current cell back to 
         // yellow and figure out which cell to turn red.
         // STUDENT CODE HERE:
-        boolean gameOn = true;
-        int lastC = redC;
-        int lastR = redR;
-        while(gameOn) {
-            if(keyUp()) {
-                lastC = redC;
-                lastR = redR;
-                redR++;
-                setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR, redC, NamedColor.black);
-            }
-            if(keyDown()) {
-                lastC = redC;
-                lastR = redR;
-                redR--;
-                setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR, redC, NamedColor.black);
-            }
-            if(keyRight()) {
-                lastC = redC;
-                lastR = redR;
-                redC++;
-                setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR, redC, NamedColor.black);
-            }
-            if(keyLeft()) {
-                lastC = redC;
-                lastR = redR;
-                redC--;
-                setBGColor(redR,redC,NamedColor.red);
-                setBGColor(lastR, redC, NamedColor.black);
-            }
-            
+        //setBGColor(4,5,NamedColor.blue); //test
+        
+        if(gameOn) {
+        if(keyUpJustPressed()) {
+            moveUp(redC, redR);
         }
-        if(redC == 0 || redC == getBoardWidth()-1 || redR == 0 || redR == getBoardWidth()-1) {
+        if(keyDownJustPressed()) {
+            moveDown(redC, redR);
+        }
+         if(keyRightJustPressed()) {
+            moveRight(redC, redR);
+        }
+        if(keyLeftJustPressed()) {
+            moveLeft(redC, redR);
+        }
+    
+        if(redC <= 0 || redC >= getBoardWidth()-1 || redR <= 0 || redR >= getBoardWidth()-1) {
             setBGColor(redR, redC, NamedColor.blue);
             drawSymbol(redR, redC, NamedSymbol.bomb, NamedColor.red);
             gameOn = false;
         }
-        
-        
-   }
+    }    
+    }
  
-   // When your gameLoop() method gets undweildy and needs to be decomposed, create methods below
+   // When your gameLoop() method gets unweildy and needs to be decomposed, create methods below
    // YOUR new methods HERE:
-   
-   
+   public void moveUp(int lastC, int lastR) {
+        redR--;
+        setBGColor(redR,redC,NamedColor.red);
+        setBGColor(lastR, lastC, NamedColor.black);
+   }
+   public void moveDown(int lastC, int lastR) {
+        redR++;
+        setBGColor(redR,redC,NamedColor.red);
+        setBGColor(lastR, lastC, NamedColor.black);
+   }
+   public void moveLeft(int lastC, int lastR) {
+        redC--;
+        setBGColor(redR,redC,NamedColor.red);
+        setBGColor(lastR, lastC, NamedColor.black);
+   }
+   public void moveRight(int lastC, int lastR) {
+        redC++;
+        setBGColor(redR,redC,NamedColor.red);
+        setBGColor(lastR, lastC, NamedColor.black);
+   }
    
 } // end class GameBasics2

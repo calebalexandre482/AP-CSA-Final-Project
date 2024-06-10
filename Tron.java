@@ -1,3 +1,5 @@
+//Caleb alexandre 
+//AP CSA Final Project
 import bridges.base.NamedColor;
 import bridges.games.NonBlockingGame;
 
@@ -55,7 +57,7 @@ public class Tron extends NonBlockingGame {
         //YOUR CODE HERE:
         for(int i = 0; i < 32; i++) {
             for(int j = 0; j < 32; j++) {
-                setBGColor(i, j, NamedColor.khaki);
+                setBGColor(i, j, NamedColor.black);
             }
         }
     }
@@ -68,31 +70,31 @@ public class Tron extends NonBlockingGame {
             //set the direction of 'snake1' to "up" if the W key is pressed
             //repeat for the S, A, and D keys
             //YOUR CODE HERE:
-            if(keyW()) {
+            if(keyWJustPressed()) {
                 snake1.setDirection("up");
             }
-            if(keyS()) {
+            if(keySJustPressed()) {
                 snake1.setDirection("down");
             }
-            if(keyA()) {
+            if(keyAJustPressed()) {
                 snake1.setDirection("left");
             }
-            if(keyD()) {
+            if(keyDJustPressed()) {
                 snake1.setDirection("right");
             }
             //set the direction of 'snake2' to "up" if the up arrow key is pressed
             //repeat for the other three arrow keys
             //YOUR CODE HERE:
-            if(keyUp()) {
+            if(keyUpJustPressed()) {
                 snake1.setDirection("up");
             }
-            if(keyDown()) {
+            if(keyDownJustPressed()) {
                 snake1.setDirection("down");
             }
-            if(keyLeft()) {
+            if(keyLeftJustPressed()) {
                 snake1.setDirection("left");
             }
-            if(keyRight()) {
+            if(keyRightJustPressed()) {
                 snake1.setDirection("right");
             }
             //what is the type of these variables?
@@ -117,17 +119,17 @@ public class Tron extends NonBlockingGame {
         }
 
         //if the game is not running and the space key is pressed, restart the game
-        else if(keySpace()) {
+        else if(keySpaceJustPressed()) {
             initialize();
         }
 
         //set every square in 'snake1' to 'color1'
         //YOUR CODE HERE:
-        setBGColor(snake1.getRow(frame), snake1.getCol(frame), color1);
+        setBGColor(snake1.getRow(snake1.getSize()-1), snake1.getCol(snake1.getSize()-1), color1);
 
         //set every square in 'snake2' to 'color2'
         //YOUR CODE HERE:
-        setBGColor(snake1.getRow(frame), snake1.getCol(frame), color2);
+        setBGColor(snake2.getRow(snake2.getSize()-1), snake2.getCol(snake2.getSize()-1), color2);
 
 
         //increment the frame number

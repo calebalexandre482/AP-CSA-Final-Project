@@ -15,9 +15,9 @@ public class Interpreter {
         try {
             //get the first command-line argument and use it to create an Interpreter object called 'interpreter'
             //YOUR CODE HERE:
-            Interpreter interpreter = new Interpreter("caleb");
+            Interpreter interpreter;
             //remember to fill in your own assignment number, username, and API key
-            Bridges bridges = new Bridges(20, "calexandre", "419249051969");
+            Bridges bridges = new Bridges(100, "calexandre1", "419249051969");
             bridges.setTitle(interpreter.getTitle());
             bridges.setDescription(interpreter.getDescription());
             bridges.setDataStructure(interpreter.getPicture());
@@ -27,9 +27,8 @@ public class Interpreter {
         //if there are no command-line arguments, the program will throw an ArrayIndexOutOfBoundsException
         //create a 'catch' block that prints an error message
         //YOUR CODE HERE:
-        catch(IOException arrayIndexOutOfBoundsException) {
-            System.out.println("An error has occured: ArrayIndexOutOfBoundsException");
-            System.exit(1);
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -49,18 +48,17 @@ public class Interpreter {
     //the program in our mini-language, split by whitespace
     private String[] words;
 
-    private Interpreter(String path) throws FileNotFoundException {
+    private Interpreter(String path) {
         //read the file and interpret the first command
         readFile(path);
         interpretCommand(0);
     }
 
-    private void readFile(String path) throws FileNotFoundException {
+    private void readFile(String path) {
         try(Scanner reader = new Scanner(new FileReader(path))) {
             //create a StringBuilder object
             //YOUR CODE HERE:
-            StringBuilder squid = new StringBuilder();
-
+            StringBuilder squirrel = new StringBuilder();
             while(reader.hasNext()) {
                 //get the next line of the file and figure out if it is a comment
                 String line = reader.nextLine();
@@ -68,32 +66,35 @@ public class Interpreter {
 
                 //if the line is not a comment, append it to the StringBuilder, followed by a newline character
                 //YOUR CODE HERE:
+                if(!isComment) {
+                    squirrel.append(line);
+                }
             }
 
             //convert the StringBuilder into a string, trim it, and split it by whitespace
             //assign the result to the instance variable 'words'
             //YOUR CODE HERE:
-            String turtle = squid.toString();
-            turtle.trim();
-            words[0] = turtle;
+            String squirrelString = squirrel.toString();
+            squirrelString = squirrelString.trim();
+            words = {squirrelString};
         }
 
         //if the argument to this method isn't a real file, a FileNotFoundException will be thrown
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-        catch(IOException fileNotFoundException) {
-            System.out.println("An error has occured: FileNotFoundException");
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
             System.exit(1);
-            
         }
-        
     }
 
     private void interpretCommand(int index) {
         //if the index is out of bounds for the 'words' array, the interpreter has finished
         //stop the execution of the method with a 'return' statement if this is the case
         //YOUR CODE HERE:
-
+        if (index >= words.length) {
+            return;
+        }
         //figure out what command it is and call the associated method
         switch(words[index]) {
             case "rectangle": rectangleCommand(index); return;
@@ -104,32 +105,15 @@ public class Interpreter {
             //YOUR CODE HERE:
             case "triangle": triangleCommand(index); return;
             case "line": lineCommand(index); return;
-            case "color": colorCommand(index); return;
             case "title": titleCommand(index); return;
-            case "description": descriptionCommand(index); return;
+            case "color": colorCommand(index); return;
+            case "interpret": interpretCommand(index); return;
         }
 
         //at this point in the method, we know that the command is not valid
         //if it were a valid command, the execution of the method would have ended by now
         //print an error message and stop the program
         //YOUR CODE HERE:
-
-    }
-
-    private void descriptionCommand(int index) {
-
-    }
-
-    private void lineCommand(int index) {
-
-    }
-
-    private void triangleCommand(int index) {
-
-    }
-
-    private void circleCommand(int index) {
-        
     }
 
     private void rectangleCommand(int index) {
@@ -150,18 +134,29 @@ public class Interpreter {
             //it should be located at 'index + 5' because the 'rectangle' command takes four arguments
             interpretCommand(index + 5);
         }
+        
 
         //if the 'rectangle' commmand is not given enough arguments, an ArrayIndexOutOfBounds exception will be thrown
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
         //the 'parseFloat' method throws a NumberFormatException if it fails to convert a string into a number
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-
+        catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
         //the 'setFillColor' method throws an InvalidValueException if the argument is not a valid color
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
+        catch (InvalidValueException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
     private void squareCommand(int index) {
@@ -184,54 +179,100 @@ public class Interpreter {
         //if the 'square' commmand is not given enough arguments, an ArrayIndexOutOfBounds exception will be thrown
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
         //the 'parseFloat' method throws a NumberFormatException if it fails to convert a string into a number
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-
+        catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
         //the 'setFillColor' method throws an InvalidValueException if the argument is not a valid color
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
+        catch (InvalidValueException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
     //create a method called 'circleCommand'
     //remember that the 'circle' command in our mini-language takes three arguments: x, y, and radius
     //also, you don't need to worry about centering the shape, because BRIDGES already centers circles
     //YOUR CODE HERE:
+    private void circleCommand(int index) {
+        float x = Float.parseFloat(words[index + 1]);
+        float y = Float.parseFloat(words[index + 2]);
+        float radius = Float.parseFloat(words[index + 3]);
+
+        shapes.add(new Circle(x,y,radius).setFillColor(fillColor));
+        interpretCommand(index + 3);
+    }
 
     //create a method called 'triangleCommand'
     //remember that the 'triangle' command in our mini-language takes six arguments: x1, y1, x2, y2, x3, and y3
     //you can make an ArrayList of vertices in one line with the Arrays.asList method
     //YOUR CODE HERE:
+    private void triangleCommand(int index) {
+        float x1 = Float.parseFloat(words[index + 1]), y1 = Float.parseFloat(words[index + 2]);
+        float x2 = Float.parseFloat(words[index + 3]);
+        float y2 = Float.parseFloat(words[index + 4]);
+        float x3 = Float.parseFloat(words[index + 5]);
+        float y3 = Float.parseFloat(words[index + 6]);
+        ArrayList<Float> vertices = new ArrayList<Float>(Arrays.asList(x1,y1,x2,y2,x3,y3));
+
+        shapes.add(new Polygon(vertices).setFillColor(fillColor));
+        interpretCommand(index + 6);
+    }
 
     //create a method called 'lineCommand'
     //remember that the 'line' command in our mini-language takes five arguments: x1, y1, x2, y2, and width
     //you can create an ArrayList of endpoints in one line with the Arrays.asList method
     //YOUR CODE HERE:
+    private void lineCommand(int index) {
+        float x1 = Float.parseFloat(words[index + 1]);
+        float y1 = Float.parseFloat(words[index + 2]);
+        float x2 = Float.parseFloat(words[index + 3]);
+        float y2 = Float.parseFloat(words[index + 4]);
+        float width = Float.parseFloat(words[index + 5]);
+        ArrayList<Float> endpoints = new ArrayList<Float>(Arrays.asList(x1,y1,x2,y2,width));
+        shapes.add(new Polyline(endpoints).setStrokeColor(fillColor));
+        interpretCommand(index + 5);
+    }        
+
 
     private void colorCommand(int index) {
         try {
             //set the instance variable 'fillColor' to the next word in the file (located at index + 1)
             //YOUR CODE HERE:
-
+            fillColor = words[index + 1];
             //interpret the next command in the file (located at index + 2)
             //YOUR CODE HERE:
+            interpretCommand(index + 2);
         }
 
         //if the 'color' commmand is not given enough arguments, an ArrayIndexOutOfBounds exception will be thrown
         //create a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
     private void titleCommand(int index) {
         //create a new StringBuilder object called 'title'
         //YOUR CODE HERE:
-
+        StringBuilder title = new StringBuilder();
         //use the 'buildText' method (defined below) to get all of the text enclosed in brackets
         int i = buildText(title, index + 1, "title");
 
         //convert the StringBuilder into a String and store the result in the instance variable 'imageTitle'
         //YOUR CODE HERE:
+        imageTitle = title.toString();
 
         //interpret the next command
         interpretCommand(i + 1);
@@ -239,6 +280,12 @@ public class Interpreter {
 
     //create a method called 'descriptionCommand' similar to the 'titleCommand' method above
     //YOUR CODE HERE:
+    private void descriptionCommand(int index) {
+        StringBuilder description = new StringBuilder();
+        int i = buildText(description, index+1, "description");
+        imageDescription = description.toString();
+        interpretCommand(i + 1);
+    }
 
     //this method parses a series of words enclosed in square brackets starting at the index 'i'
     //it adds the words to the StringBuilder, and returns the index of the last word
@@ -246,13 +293,13 @@ public class Interpreter {
         try {
             //if the word at index 'i' starts with '[' and ends with ']', add the interior of the word to the StringBuilder
             //fill in the missing condition
-            if(CONDITION) {
+            if(words[i].substring(0,1).equals("[") && words[i].substring(words[i].length()-1).equals("]")) {
                 text.append(words[i], 1, words[i].length() - 1);
             }
 
             //if the word at index 'i' starts with '[' but doesn't end with ']', continue to add words via a while loop
             //fill in the missing condition
-            else if(CONDITION) {
+            else if(words[i].substring(0,1).equals("[")) {
                 text.append(words[i], 1, words[i].length());
                 while(true) {
                     i++;
@@ -260,7 +307,7 @@ public class Interpreter {
 
                     //if the word at index 'i' ends with ']', break out of the loop
                     //fill in the missing condition
-                    if(CONDITION) {
+                    if(words[i].substring(words[i].length()-1).equals("]")) {
                         text.append(words[i], 0, words[i].length() - 1);
                         break;
                     }
@@ -274,23 +321,31 @@ public class Interpreter {
             //create an 'else' block that prints an error message and stops the program
             //you can use the variable 'commandName' to make the error message more descriptive
             //YOUR CODE HERE:
+            else {
+                System.out.println("Syntax Error");
+                System.exit(1);
+            }
         }
 
         //if there is no closing bracket, the interpreter will throw an ArrayIndexOutOfBoundsException
         //write a 'catch' block that prints an error message and stops the program
         //YOUR CODE HERE:
-
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
         return i;
     }
 
     //make two getter methods called 'getTitle' and 'getDescription'
     //YOUR CODE HERE:
-    public String getTitle() {
-        return "title";
+    private void getTitle() {
+        
     }
-    public String getDescription() {
-        return "description";
+    private void getDescription() {
+        
     }
+
     private SymbolCollection getPicture() {
         //create a SymbolCollection object
         //loop through each element of 'shapes' and add it to the SymbolCollection

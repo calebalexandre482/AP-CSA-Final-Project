@@ -1,3 +1,5 @@
+//Caleb Alexandre
+//AP CSA Final Project
 import java.util.ArrayList;
 
 public class Snake {
@@ -92,6 +94,8 @@ public class Snake {
         //YOUR CODE HERE:
         int newRow = rows.get(rows.size()-1) + rowChange;
         int newCol = cols.get(cols.size()-1) + colChange;
+        
+
         //if the point [newRow, newCol] is already in the snake, return 'true'
         //moving forward would cause the snake to crash into itself!
         //YOUR CODE HERE:
@@ -109,7 +113,7 @@ public class Snake {
         //if the point [newRow, newCol] is out of bounds, return 'true'
         //moving forward would cause the snake to go off the screen!
         //YOUR CODE HERE:
-        if(newRow < 0 || newCol < 0)
+        if(newRow < 0 || newCol < 0 || newRow > width-1 || newCol > height-1)
             return true;
         //add 'newRow' and 'newCol' to 'rows' and 'cols' respectively
         //YOUR CODE HERE:
