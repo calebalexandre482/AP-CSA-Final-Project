@@ -43,7 +43,7 @@ public class Snake {
         //set 'direction' to 'newDirection', unless the opposite of 'direction' is equal to 'newDirection'
         //this condition keeps the snake from turning back on itself
         //YOUR CODE HERE:
-        if(newDirection != opposite)
+        if(!newDirection.equals(opposite))
             direction = newDirection;
     }
 
@@ -75,20 +75,24 @@ public class Snake {
         //create two variables called 'rowChange' and 'colChange' based on the snake's direction
         //for example, if the snake is moving up, 'rowChange' should be -1 and 'colChange' should be 0
         //YOUR CODE HERE:
-        int rowChange;
-        int colChange;
-        if(direction.equals("up"))
+        int rowChange = 0;
+        int colChange = 0;
+        if(direction.equals("up")){
             rowChange = -1;
             colChange = 0;
-        if(direction.equals("down"))
+        }
+        if(direction.equals("down")) {
             rowChange = 1;
             colChange = 0;
-        if(direction.equals("left"))
+        }
+        if(direction.equals("left")){
             colChange = -1;
             rowChange = 0;
-        if(direction.equals("right"))
+        }
+        if(direction.equals("right")){
             colChange = 1;
             rowChange = 0; 
+        }
         //create a variable called 'newRow' which equals the last row number plus 'rowChange'
         //create a variable called 'newCol' which equals the last column number plus 'colChange'
         //YOUR CODE HERE:

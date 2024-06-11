@@ -70,33 +70,15 @@ public class Tron extends NonBlockingGame {
             //set the direction of 'snake1' to "up" if the W key is pressed
             //repeat for the S, A, and D keys
             //YOUR CODE HERE:
-            if(keyWJustPressed()) {
-                snake1.setDirection("up");
-            }
-            if(keySJustPressed()) {
-                snake1.setDirection("down");
-            }
-            if(keyAJustPressed()) {
-                snake1.setDirection("left");
-            }
-            if(keyDJustPressed()) {
-                snake1.setDirection("right");
-            }
-            //set the direction of 'snake2' to "up" if the up arrow key is pressed
-            //repeat for the other three arrow keys
-            //YOUR CODE HERE:
-            if(keyUpJustPressed()) {
-                snake1.setDirection("up");
-            }
-            if(keyDownJustPressed()) {
-                snake1.setDirection("down");
-            }
-            if(keyLeftJustPressed()) {
-                snake1.setDirection("left");
-            }
-            if(keyRightJustPressed()) {
-                snake1.setDirection("right");
-            }
+            if (keyW()) snake1.setDirection("up");
+            if (keyS()) snake1.setDirection("down");
+            if (keyA()) snake1.setDirection("left");
+            if (keyD()) snake1.setDirection("right");
+
+            if (keyUp()) snake2.setDirection("up");
+            if (keyDown()) snake2.setDirection("down");
+            if (keyLeft()) snake2.setDirection("left");
+            if (keyRight()) snake2.setDirection("right");
             //what is the type of these variables?
             boolean dead1 = snake1.move(snake2, getBoardHeight(), getBoardWidth());
             boolean dead2 = snake2.move(snake1, getBoardHeight(), getBoardWidth());
@@ -104,16 +86,28 @@ public class Tron extends NonBlockingGame {
             if(dead1) {
                 //stop the game and change 'color2' to the winning color
                 //YOUR CODE HERE:
-                color2 = NamedColor.violet;
+                color2 = NamedColor.yellow;
                 color1 = NamedColor.gray;
                 game = false;
+                for(int i = 0; i < snake1.getSize(); i++) {
+                    setBGColor(snake1.getRow(i), snake1.getCol(i), color1);
+                }
+                for(int i = 0; i < snake2.getSize(); i++) {
+                    setBGColor(snake2.getRow(i), snake2.getCol(i), color2);
+                }
             }
             if(dead2) {
                 //stop the game and change 'color1' to the winning color
                 //YOUR CODE HERE:
-                color1 = NamedColor.violet;
+                color1 = NamedColor.yellow;
                 color2 = NamedColor.gray;
                 game = false;
+                for(int i = 0; i < snake1.getSize(); i++) {
+                    setBGColor(snake1.getRow(i), snake1.getCol(i), color1);
+                }
+                for(int i = 0; i < snake2.getSize(); i++) {
+                    setBGColor(snake2.getRow(i), snake2.getCol(i), color2);
+                }
 
             }
         }

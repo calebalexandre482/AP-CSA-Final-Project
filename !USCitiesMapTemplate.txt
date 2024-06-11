@@ -1,0 +1,73 @@
+import bridges.base.*;
+import bridges.connect.Bridges;
+import bridges.data_src_dependent.City;
+import bridges.connect.DataSource;
+
+import java.util.Comparator;
+import java.util.Vector;
+import java.util.List;
+import java.util.HashMap;
+
+
+class USCitiesMap {
+
+    public static void main(String[] args) throws Exception {
+        // set up bridges 
+        Bridges bridges = new Bridges(99, "calexandre1", "419249051969");
+
+        // TODO: choose cities that you want to put on the map, and enter their name and the state that they are in. You can add as many as you want. 
+        // You can get a list of all cities in the datbase here: http://bridgesdata.herokuapp.com/api/us_cities
+        String[][] cityDataList = {
+            {"Las Vegas", "NV"},
+            {"West Nyack", "NY"},
+            {"Tappan", "NY"}
+        };
+
+        // TODO: create a new hashmap object that can hold two string values. This is used as input to find the city object you want from the database. 
+        HashMap<String,String> data = new HashMap<String,String>();
+        // TODO: create array for all the city objects to go in 
+        City[] cityList = new City[3];
+        // This loop will loop through the array with all of the city data. 
+        for(int i = 0; i < cityDataList.length; i++)
+        {
+            // TODO: add the city data(the name and state) to the hashmap. The labels should be "city" and "state"
+            data.put(cityDataList[i][0], cityDataList[i][1]);
+            // TODO: use hashmap object as input to the getUSCitiesData() method to find the city. This method will return a Vector object, which is similar to an ArrayList. 
+            // This Vector object will have one City object in it, which is what you need to add to the list. So you will need to use the get() method to get the City from the Vector, and add 
+            // the city to your city array 
+            Vector<City> placeholder = bridges.getDataSource().getUSCitiesData(data);
+            cityList[i] = placeholder.get(i-i);
+            // TODO: clear the values in the hashmap object so new ones can be put in for the next city
+            data.clear();
+        }
+
+        // This is the GraphAdjList object you will use to add vertices to the screen to represent cities  
+        GraphAdjList<Integer, City, City> graph = new GraphAdjList<Integer, City, City>();
+        
+        // loop through cities and add each one to the graph 
+        for(int i = 0; i < cityList.length; i++)
+        {
+            // TODO: add a vertex to the graph with the index of i
+            graph.addVertex(i, cityList[i]);
+            // TODO: set the location on the graph to the cities longitude and latitude 
+            
+            // TODO: set the label of the vertex to be the name of the city, and any other information you want to be on there. 
+
+            // TODO: mainpulate any other part of the vertex(such as size, color, or shape) based on the atrivutes of the city. 
+            
+        }
+
+    
+        // set map of world but only show US
+        bridges.setCoordSystemType("equirectangular");
+        bridges.setMapOverlay(true);
+        bridges.setMap("world", "United States of America");
+        //set title and description
+        bridges.setTitle("Map of Cities");
+        bridges.setDescription("Caleb Alexandre - Shows Locations of US Cities on the map");
+        bridges.setDataStructure(graph);
+        bridges.visualize();
+    }
+
+    
+}
