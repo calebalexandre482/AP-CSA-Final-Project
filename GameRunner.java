@@ -171,7 +171,8 @@ public class GameRunner extends NonBlockingGame
             // sets the current row and column of the character 
             // to lastCharR and lastCharC
             // YOUR CODE HERE:
-            
+            lastCharC = charC;
+            lastCharR = charR;
 
             // if the up key is pressed
             if(keyUp())
@@ -226,8 +227,14 @@ public class GameRunner extends NonBlockingGame
                 else {
                     // if it was not inside the grid, the row location of the character stays the same
                     // YOUR CODE HERE:
-                    charR = charR;
-                    charC = charC;
+                    if(charR > getBoardHeight());
+                        charR = getBoardHeight()-1;
+                    if(charR < 0)
+                        charR = 0;
+                    if(charC > getBoardWidth());
+                        charR = getBoardWidth()-1;
+                    if(charC < 0)
+                        charC = 0;
 
                 }
                 // constantly checks if the player is dead for every time the up key was pressed
@@ -287,8 +294,14 @@ public class GameRunner extends NonBlockingGame
                 else {
                     // if it was not inside the grid, the row location of the character stays the same
                     // YOUR CODE HERE:
-                    charR = charR;
-                    charC = charC;
+                    if(charR > getBoardHeight());
+                        charR = getBoardHeight()-1;
+                    if(charR < 0)
+                        charR = 0;
+                    if(charC > getBoardWidth());
+                        charR = getBoardWidth()-1;
+                    if(charC < 0)
+                        charC = 0;
 
                 }
                 // constantly checks if the player is dead for every time the up key was pressed
@@ -349,8 +362,14 @@ public class GameRunner extends NonBlockingGame
                 else {
                     // if it was not inside the grid, the column location of the character stays the same
                     // YOUR CODE HERE:
-                    charR = charR;
-                    charC = charC;
+                    if(charR > getBoardHeight());
+                        charR = getBoardHeight()-1;
+                    if(charR < 0)
+                        charR = 0;
+                    if(charC > getBoardWidth());
+                        charR = getBoardWidth()-1;
+                    if(charC < 0)
+                        charC = 0;
 
                 }
                 // constantly checks if the player is dead for every time the up key was pressed
@@ -411,8 +430,14 @@ public class GameRunner extends NonBlockingGame
                 else {
                     // if it was not inside the grid, the column location of the character stays the same
                     // YOUR CODE HERE:
-                    charR = charR;
-                    charC = charC;
+                    if(charR > getBoardHeight());
+                        charR = getBoardHeight()-1;
+                    if(charR < 0)
+                        charR = 0;
+                    if(charC > getBoardWidth());
+                        charR = getBoardWidth()-1;
+                    if(charC < 0)
+                        charC = 0;
                    
                 }
                 // constantly checks if the player is dead for every time the up key was pressed
